@@ -1,0 +1,52 @@
+{
+  "run_name": "kanto_smoke",
+  "n_smoke": 495725,
+  "n_features": 14,
+  "n_epochs": 30,
+  "batch_size": 4096,
+  "n_inducing": 4000,
+  "final_loss": 0.941977890299969,
+  "training_time_seconds": 3323.11801562499,
+  "target_mean": 5.914089679718018,
+  "target_std": 10.301900909973144,
+  "target_transform": "none",
+  "regime_one_hot": true,
+  "heteroscedastic_noise": true,
+  "spatial_kfold": [
+    {
+      "fold": 0,
+      "n_train": 330629,
+      "n_test": 165096,
+      "rmse": 6.592522621154785,
+      "mae": 3.7925026416778564,
+      "std_mean": 8.589183807373047
+    },
+    {
+      "fold": 1,
+      "n_train": 328841,
+      "n_test": 166884,
+      "rmse": 6.281645774841309,
+      "mae": 3.4531517028808594,
+      "std_mean": 8.587005615234375
+    },
+    {
+      "fold": 2,
+      "n_train": 331980,
+      "n_test": 163745,
+      "rmse": 6.6979193687438965,
+      "mae": 3.8234121799468994,
+      "std_mean": 8.591552734375
+    }
+  ],
+  "regime_distribution": {
+    "0": 331845,
+    "7": 41818,
+    "1": 87776,
+    "3": 18799,
+    "4": 15068,
+    "2": 98,
+    "6": 3,
+    "5": 318
+  },
+  "device": "mps"
+}

@@ -1,0 +1,110 @@
+[project]
+name = "kanto-calibrated-spt-prior"
+version = "0.1.0"
+description = "Companion repository for 'A calibrated regional screening framework for SPT N-values from public borehole records under strict spatial cross-validation' (Computers and Geotechnics submission)."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11,<3.14"
+authors = [
+    { name = "Ryota Okauchi", email = "ryoutaokauchi@g.ecc.u-tokyo.ac.jp" },
+    { name = "Pang-jo Chun" },
+]
+keywords = [
+    "geotechnical-engineering",
+    "spt-n-value",
+    "regional-screening-framework",
+    "strict-spatial-cross-validation",
+    "split-conformal-prediction",
+    "mondrian-conformal",
+    "conditional-coverage-diagnostic",
+    "right-censored-survival-analysis",
+    "random-survival-forest",
+    "pre-investigation-planning",
+    "kunijiban",
+    "kanto-plain",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering",
+]
+
+# Dependencies common to all reproductions.
+dependencies = [
+    "numpy>=1.26.0,<2.0",        # PyTorch compatibility
+    "pandas>=2.1.0",
+    "scipy>=1.11.0",
+    "scikit-learn>=1.3.0",
+    "matplotlib>=3.8.0",
+    "seaborn>=0.13.0",
+    "geopandas>=1.0.0",
+    "shapely>=2.0.0",
+    "pyarrow>=16.0.0",
+    "rasterio>=1.3.10",
+    "rioxarray>=0.17.0",
+    "xarray>=2024.7.0",
+    "zarr>=2.18.0,<3.0",
+    "dask[array]>=2024.7.0",
+    "pyproj>=3.6.0",
+    "pydantic>=2.11.7",
+    "omegaconf>=2.3.0",
+    "hydra-core>=1.3.2",
+    "torch>=2.0.0",
+    "gpytorch>=1.13.0",
+    "linear-operator>=0.5.0",
+]
+
+[project.optional-dependencies]
+# Tree ensembles + survival analysis (used by run_baselines /
+# run_advanced_baselines / run_threshold_classifiers /
+# train_hurdle_model / train_survival_depth_to_stiff /
+# train_hybrid_kanto).
+baselines = [
+    "catboost>=1.2.0,<3.0",
+    "lightgbm>=4.5.0,<5.0",
+    "xgboost>=2.1.0,<4.0",
+    "lifelines>=0.30.0,<1.0",
+]
+
+# Development tools (linting, type-checking, tests). Not required
+# for reproduction.
+dev = [
+    "pytest>=8.0.0",
+    "ruff>=0.12.8",
+    "mypy>=1.17.1",
+]
+
+[project.urls]
+Homepage = "https://github.com/UT-Team-Chun/kanto-calibrated-spt-prior"
+Repository = "https://github.com/UT-Team-Chun/kanto-calibrated-spt-prior"
+Issues = "https://github.com/UT-Team-Chun/kanto-calibrated-spt-prior/issues"
+
+# ============================================================
+# Build system
+# ============================================================
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["national"]
+
+# ============================================================
+# Tool configurations
+# ============================================================
+[tool.ruff]
+line-length = 99
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "C4"]
+ignore = ["E501", "E731", "E741", "B008", "C901"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+
+[tool.mypy]
+ignore_missing_imports = true
+follow_imports = "silent"

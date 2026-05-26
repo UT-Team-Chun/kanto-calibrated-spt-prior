@@ -1,0 +1,55 @@
+{
+  "run_name": "kanto_smoke",
+  "n_smoke": 495725,
+  "n_features": 14,
+  "n_epochs": 50,
+  "batch_size": 4096,
+  "n_inducing": 6000,
+  "final_loss": 0.8917962381097136,
+  "training_time_seconds": 18184.496414702997,
+  "target_mean": 5.914089679718018,
+  "target_std": 10.301900909973144,
+  "target_transform": "none",
+  "regime_one_hot": true,
+  "heteroscedastic_noise": false,
+  "kernel_type": "rbf",
+  "mean_type": "linear",
+  "inducing_init": "kmeans_pp_stratified",
+  "spatial_kfold": [
+    {
+      "fold": 0,
+      "n_train": 330629,
+      "n_test": 165096,
+      "rmse": 6.077396392822266,
+      "mae": 3.343492269515991,
+      "std_mean": 6.115346908569336
+    },
+    {
+      "fold": 1,
+      "n_train": 328841,
+      "n_test": 166884,
+      "rmse": 5.810985565185547,
+      "mae": 3.0716168880462646,
+      "std_mean": 6.114711284637451
+    },
+    {
+      "fold": 2,
+      "n_train": 331980,
+      "n_test": 163745,
+      "rmse": 6.136101245880127,
+      "mae": 3.3340868949890137,
+      "std_mean": 6.11665678024292
+    }
+  ],
+  "regime_distribution": {
+    "0": 331845,
+    "7": 41818,
+    "1": 87776,
+    "3": 18799,
+    "4": 15068,
+    "2": 98,
+    "6": 3,
+    "5": 318
+  },
+  "device": "cuda"
+}

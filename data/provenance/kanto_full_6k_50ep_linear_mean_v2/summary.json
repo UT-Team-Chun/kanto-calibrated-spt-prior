@@ -1,0 +1,55 @@
+{
+  "run_name": "kanto_smoke",
+  "n_smoke": 495725,
+  "n_features": 14,
+  "n_epochs": 50,
+  "batch_size": 4096,
+  "n_inducing": 6000,
+  "final_loss": 0.8871865824597781,
+  "training_time_seconds": 18379.638001479005,
+  "target_mean": 5.914089679718018,
+  "target_std": 10.301900909973144,
+  "target_transform": "none",
+  "regime_one_hot": true,
+  "heteroscedastic_noise": false,
+  "kernel_type": "matern52",
+  "mean_type": "linear",
+  "inducing_init": "random",
+  "spatial_kfold": [
+    {
+      "fold": 0,
+      "n_train": 330629,
+      "n_test": 165096,
+      "rmse": 6.05980110168457,
+      "mae": 3.32594895362854,
+      "std_mean": 6.094031810760498
+    },
+    {
+      "fold": 1,
+      "n_train": 328841,
+      "n_test": 166884,
+      "rmse": 5.764161109924316,
+      "mae": 3.0245869159698486,
+      "std_mean": 6.0902838706970215
+    },
+    {
+      "fold": 2,
+      "n_train": 331980,
+      "n_test": 163745,
+      "rmse": 6.104062557220459,
+      "mae": 3.3240435123443604,
+      "std_mean": 6.093939304351807
+    }
+  ],
+  "regime_distribution": {
+    "0": 331845,
+    "7": 41818,
+    "1": 87776,
+    "3": 18799,
+    "4": 15068,
+    "2": 98,
+    "6": 3,
+    "5": 318
+  },
+  "device": "cuda"
+}

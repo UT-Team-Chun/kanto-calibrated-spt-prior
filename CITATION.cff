@@ -1,0 +1,73 @@
+cff-version: 1.2.0
+message: "If you use this software in your research, please cite the accompanying paper."
+title: "A calibrated regional screening framework for SPT N-values from public borehole records under strict spatial cross-validation"
+type: software
+authors:
+  - family-names: "Okauchi"
+    given-names: "Ryota"
+    orcid: "https://orcid.org/0009-0001-5391-7133"
+    affiliation: "The University of Tokyo"
+    website: "https://github.com/R-Okauchi"
+  - family-names: "Chun"
+    given-names: "Pang-jo"
+    affiliation: "The University of Tokyo"
+abstract: >-
+  A calibrated regional screening framework that turns the public
+  KuniJiban borehole archive into a pre-investigation predictive
+  product over raw SPT N-values, evaluated under a mesh-keyed
+  spatial K-fold protocol on 495,725 measurements from 21,031
+  unique boreholes over the Japanese Kanto plain. The framework
+  treats the regressor as a configurable component and instantiates
+  it with six interchangeable candidates (DKL+SVGP, CatBoost,
+  LightGBM, XGBoost, LightGBM-CQR, GPBoost). Under proper spatial
+  K-fold, no single regressor dominates: CatBoost wins random-fold
+  point estimate, GPBoost wins contiguous-fold point estimate by a
+  substantial margin (paired BCa 95% CI excludes zero), and
+  LightGBM-CQR wins random-fold stiff-layer conformal coverage. A
+  model-agnostic split-conformal layer with a Mondrian (regime by
+  depth) conditional-coverage decomposition substantially reduces
+  the marginal coverage deficit, reaching near-nominal coverage
+  under random mesh folds while exposing residual under-coverage
+  under contiguous spatial extrapolation. A right-censored survival
+  reformulation of the depth-to-first-stiff endpoint incorporates
+  the 65.2% of boreholes that did not encounter N >= 30 within
+  their surveyed depth; the released survival predictor is Random
+  Survival Forest because the Schoenfeld test rejects the Cox
+  proportional-hazards assumption at p < 10^-12 across all spatial
+  folds. Engineering-facing primitives accompany the release
+  (isotonic-recalibrated threshold classifiers, per-borehole
+  soft-layer and upper-10 m regressors, and a do-not-trust mask
+  for locations more than 5 km from any training borehole).
+keywords:
+  - geotechnical engineering
+  - SPT N-value
+  - regional screening framework
+  - strict spatial cross-validation
+  - split-conformal prediction
+  - conditional-coverage diagnostic
+  - Mondrian conformal
+  - right-censored survival analysis
+  - Random Survival Forest
+  - pre-investigation planning
+  - KuniJiban borehole archive
+  - Kanto plain
+license: MIT
+repository-code: "https://github.com/UT-Team-Chun/kanto-calibrated-spt-prior"
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.20376580
+    description: "Zenodo concept DOI (resolves to the latest release)."
+preferred-citation:
+  type: article
+  title: "A calibrated regional screening framework for SPT N-values from public borehole records under strict spatial cross-validation"
+  authors:
+    - family-names: "Okauchi"
+      given-names: "Ryota"
+      orcid: "https://orcid.org/0009-0001-5391-7133"
+      affiliation: "The University of Tokyo"
+    - family-names: "Chun"
+      given-names: "Pang-jo"
+      affiliation: "The University of Tokyo"
+  journal: "Computers and Geotechnics"
+  year: 2026
+  status: "under-review"

@@ -1,0 +1,53 @@
+{
+  "run_name": "kanto_smoke",
+  "n_smoke": 331980,
+  "n_features": 14,
+  "n_epochs": 50,
+  "batch_size": 4096,
+  "n_inducing": 6000,
+  "final_loss": 0.9101059756627897,
+  "training_time_seconds": 1665.746172549,
+  "target_mean": 0.5138758420944214,
+  "target_std": 9.842118309570312,
+  "target_transform": "none",
+  "regime_one_hot": true,
+  "heteroscedastic_noise": false,
+  "kernel_type": "rbf",
+  "mean_type": "linear",
+  "inducing_init": "random",
+  "likelihood_type": "gaussian",
+  "studentt_df_init": 4.0,
+  "encoder_dim": 24,
+  "spatial_kfold": [
+    {
+      "fold": 0,
+      "n_train": 331980,
+      "n_test": 163745,
+      "rmse": 11.609686851501465,
+      "mae": 8.084002494812012,
+      "std_mean": 6.009372234344482
+    }
+  ],
+  "regime_distribution": {
+    "0": 225312,
+    "1": 56366,
+    "7": 29683,
+    "4": 8263,
+    "3": 12044,
+    "2": 98,
+    "6": 3,
+    "5": 211
+  },
+  "device": "cuda",
+  "hybrid_mode": true,
+  "baseline_name": "catboost",
+  "baseline_pred_train": "/mnt/nas/runs/baselines_kanto_hybrid_xfit/catboost_pred_train_oob_fold2.npy",
+  "baseline_pred_test": "/mnt/nas/runs/baselines_kanto_hybrid_xfit/catboost_pred_test_fold2.npy",
+  "feature_columns": [
+    "absolute_elevation",
+    "river_distance_km",
+    "coast_distance_km"
+  ],
+  "zero_fourier": false,
+  "fold_assignment": "random"
+}

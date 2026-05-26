@@ -1,0 +1,43 @@
+{
+  "protocol": "contiguous",
+  "n_folds": 3,
+  "fold_sizes_borings": [
+    10760,
+    3424,
+    6847
+  ],
+  "event_rate": 0.34758214064951737,
+  "n_boreholes_total": 21031,
+  "fold_metrics": [
+    {
+      "fold": 0,
+      "n_train": 10271,
+      "n_test": 10760,
+      "c_index_harrell": 0.546392399407827,
+      "binary_within_30m_auc": 0.555528132187252,
+      "binary_within_30m_brier": 0.20538994382529954,
+      "wall_clock_s": 0.3499288558959961
+    },
+    {
+      "fold": 1,
+      "n_train": 17607,
+      "n_test": 3424,
+      "c_index_harrell": 0.5569461827284106,
+      "binary_within_30m_auc": 0.5164057545426972,
+      "binary_within_30m_brier": 0.39103309859143165,
+      "wall_clock_s": 0.3473970890045166
+    },
+    {
+      "fold": 2,
+      "n_train": 14184,
+      "n_test": 6847,
+      "c_index_harrell": 0.5289782330913083,
+      "binary_within_30m_auc": 0.5407599876762977,
+      "binary_within_30m_brier": 0.21559423687657459,
+      "wall_clock_s": 0.45589184761047363
+    }
+  ],
+  "c_index_mean": 0.5441056050758486,
+  "auc_within_30m_mean": 0.5375646248020823,
+  "brier_within_30m_mean": 0.27067242643110195
+}

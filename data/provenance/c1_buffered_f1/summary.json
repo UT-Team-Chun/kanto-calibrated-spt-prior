@@ -1,0 +1,39 @@
+{
+  "run_name": "kanto_smoke",
+  "n_smoke": 13805,
+  "n_features": 14,
+  "n_epochs": 50,
+  "batch_size": 4096,
+  "n_inducing": 6000,
+  "final_loss": 1.1842153668403625,
+  "training_time_seconds": 130.3588859470001,
+  "target_mean": 5.914089679718018,
+  "target_std": 10.301900909973144,
+  "target_transform": "none",
+  "regime_one_hot": true,
+  "heteroscedastic_noise": false,
+  "kernel_type": "rbf",
+  "mean_type": "linear",
+  "inducing_init": "random",
+  "likelihood_type": "gaussian",
+  "studentt_df_init": 4.0,
+  "encoder_dim": 24,
+  "spatial_kfold": [
+    {
+      "fold": 0,
+      "n_train": 13805,
+      "n_test": 166884,
+      "rmse": 16.888364791870117,
+      "mae": 13.244638442993164,
+      "std_mean": 12.1287260055542
+    }
+  ],
+  "regime_distribution": {
+    "7": 1331,
+    "0": 8191,
+    "4": 2670,
+    "3": 875,
+    "1": 738
+  },
+  "device": "cuda"
+}

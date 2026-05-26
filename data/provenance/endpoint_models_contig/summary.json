@@ -1,0 +1,192 @@
+{
+  "endpoints": [
+    {
+      "endpoint": "depth_to_first_N30",
+      "n_censored": 13721,
+      "per_fold": [
+        {
+          "fold": 0,
+          "n_test": 10760,
+          "n_test_uncensored": 3413,
+          "mae_uncensored": 8.106505161869329,
+          "rmse_uncensored": 10.792923622387107,
+          "r2_uncensored": 0.3541766127071173,
+          "quantile_80_coverage": 0.40462935833577496,
+          "quantile_80_width": 10.461525962443137,
+          "wall_clock_s": 612.9076671600342,
+          "auc_has_event": 0.4591244375629546
+        },
+        {
+          "fold": 1,
+          "n_test": 3424,
+          "n_test_uncensored": 1554,
+          "mae_uncensored": 3.9278974291684965,
+          "rmse_uncensored": 5.303780727787591,
+          "r2_uncensored": 0.10986092204276576,
+          "quantile_80_coverage": 0.25933075933075933,
+          "quantile_80_width": 3.6312720171445045,
+          "wall_clock_s": 986.8845655918121,
+          "auc_has_event": 0.4271645021645022
+        },
+        {
+          "fold": 2,
+          "n_test": 6847,
+          "n_test_uncensored": 2343,
+          "mae_uncensored": 7.215505260179163,
+          "rmse_uncensored": 9.565328035579611,
+          "r2_uncensored": 0.30287158953081605,
+          "quantile_80_coverage": 0.45283824157063596,
+          "quantile_80_width": 10.266398432626588,
+          "wall_clock_s": 679.7499482631683,
+          "auc_has_event": 0.42312525473129664
+        }
+      ],
+      "mean_mae": 6.416635950405663,
+      "mean_rmse": 8.554010795251436,
+      "mean_r2": 0.25563637476023304,
+      "mean_q80_coverage": 0.3722661197457234,
+      "mean_q80_width": 8.119732137404743,
+      "mean_auc_has_event": 0.4364713981529178
+    },
+    {
+      "endpoint": "soft_thickness_lt5_0_to_10m",
+      "n_censored": 0,
+      "per_fold": [
+        {
+          "fold": 0,
+          "n_test": 10760,
+          "n_test_uncensored": 10760,
+          "mae_uncensored": 2.6157014108261096,
+          "rmse_uncensored": 3.131757782382991,
+          "r2_uncensored": -0.14850581944796404,
+          "quantile_80_coverage": 0.3836431226765799,
+          "quantile_80_width": 3.4256152891443756,
+          "wall_clock_s": 1385.4404637813568
+        },
+        {
+          "fold": 1,
+          "n_test": 3424,
+          "n_test_uncensored": 3424,
+          "mae_uncensored": 2.9382885579704983,
+          "rmse_uncensored": 3.450306130347636,
+          "r2_uncensored": -0.18512647740344246,
+          "quantile_80_coverage": 0.29380841121495327,
+          "quantile_80_width": 3.913596316079315,
+          "wall_clock_s": 806.7674169540405
+        },
+        {
+          "fold": 2,
+          "n_test": 6847,
+          "n_test_uncensored": 6847,
+          "mae_uncensored": 2.585803318154366,
+          "rmse_uncensored": 3.0530503425045605,
+          "r2_uncensored": -0.01864515069084427,
+          "quantile_80_coverage": 0.5126332700452753,
+          "quantile_80_width": 3.2630154980728214,
+          "wall_clock_s": 1131.0799961090088
+        }
+      ],
+      "mean_mae": 2.713264428983658,
+      "mean_rmse": 3.2117047517450623,
+      "mean_r2": -0.11742581584741692,
+      "mean_q80_coverage": 0.3966949346456028,
+      "mean_q80_width": 3.5340757010988373
+    },
+    {
+      "endpoint": "mean_N_upper_10m",
+      "n_censored": 110,
+      "per_fold": [
+        {
+          "fold": 0,
+          "n_test": 10760,
+          "n_test_uncensored": 10701,
+          "mae_uncensored": 4.833543226200266,
+          "rmse_uncensored": 6.14129607777763,
+          "r2_uncensored": -0.24387789536742388,
+          "quantile_80_coverage": 0.43164190262592284,
+          "quantile_80_width": 7.035642830672529,
+          "wall_clock_s": 832.195662021637
+        },
+        {
+          "fold": 1,
+          "n_test": 3424,
+          "n_test_uncensored": 3395,
+          "mae_uncensored": 6.723379372130218,
+          "rmse_uncensored": 8.104576582289521,
+          "r2_uncensored": -0.09782585096295815,
+          "quantile_80_coverage": 0.5269513991163476,
+          "quantile_80_width": 9.624118958490735,
+          "wall_clock_s": 1003.4816210269928
+        },
+        {
+          "fold": 2,
+          "n_test": 6847,
+          "n_test_uncensored": 6825,
+          "mae_uncensored": 4.248190770732723,
+          "rmse_uncensored": 5.69249607998276,
+          "r2_uncensored": -0.027165753882846255,
+          "quantile_80_coverage": 0.5736263736263736,
+          "quantile_80_width": 4.984595261393325,
+          "wall_clock_s": 1138.9997019767761
+        }
+      ],
+      "mean_mae": 5.268371123021069,
+      "mean_rmse": 6.64612291334997,
+      "mean_r2": -0.1229565000710761,
+      "mean_q80_coverage": 0.510739891789548,
+      "mean_q80_width": 7.214785683518862
+    },
+    {
+      "endpoint": "min_N_upper_10m",
+      "n_censored": 110,
+      "per_fold": [
+        {
+          "fold": 0,
+          "n_test": 10760,
+          "n_test_uncensored": 10701,
+          "mae_uncensored": 1.360674310288333,
+          "rmse_uncensored": 2.342503254092104,
+          "r2_uncensored": -0.2477396583678475,
+          "quantile_80_coverage": 0.7565648070273806,
+          "quantile_80_width": 2.4259180902632775,
+          "wall_clock_s": 775.8318631649017
+        },
+        {
+          "fold": 1,
+          "n_test": 3424,
+          "n_test_uncensored": 3395,
+          "mae_uncensored": 1.42997385881593,
+          "rmse_uncensored": 2.90923838755823,
+          "r2_uncensored": -0.08756120031443304,
+          "quantile_80_coverage": 0.8141384388807069,
+          "quantile_80_width": 1.5423390864954543,
+          "wall_clock_s": 1022.972874879837
+        },
+        {
+          "fold": 2,
+          "n_test": 6847,
+          "n_test_uncensored": 6825,
+          "mae_uncensored": 1.0081292251841598,
+          "rmse_uncensored": 1.8320731813649194,
+          "r2_uncensored": -0.26293739839432995,
+          "quantile_80_coverage": 0.8266666666666667,
+          "quantile_80_width": 1.4144114934507974,
+          "wall_clock_s": 672.196044921875
+        }
+      ],
+      "mean_mae": 1.2662591314294742,
+      "mean_rmse": 2.361271607671751,
+      "mean_r2": -0.19941275235887015,
+      "mean_q80_coverage": 0.7991233041915847,
+      "mean_q80_width": 1.7942228900698431
+    }
+  ],
+  "n_boreholes": 21031,
+  "fold_sizes": [
+    10760,
+    3424,
+    6847
+  ],
+  "fold_assignment": "contiguous",
+  "classifier": "catboost"
+}

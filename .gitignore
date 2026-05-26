@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local environment
+.env
+.envrc
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.run.xml
+*.bcf
+
+# OS noise
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+
+# Raw KuniJiban data — never commit (license forbids redistribution)
+data/raw/
+data/kunijiban_extract/
+*.xml
+
+# Large model artefacts — distributed via GitHub Release, not the tree
+*.pt
+*.safetensors
+foundation_model.pt
+foundation_model.meta.json
+
+# Generated COG/Zarr outputs from full national runs (not Kanto release scope)
+outputs/national/
+
+# Editor swap files
+*~
+*.swp
+*.swo
