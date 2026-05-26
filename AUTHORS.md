@@ -87,10 +87,10 @@ extraction procedure documented in
 
 Per Elsevier's *Declaration of generative-AI and AI-assisted
 technologies in the writing process* requirement: the authors
-used an AI-assisted tool (Anthropic Claude) for English-language
-polishing and for simulating critical reviewer commentary on
-draft text during manuscript preparation. The authors reviewed,
-edited, and verified all AI-assisted output, and take full
-responsibility for the final scientific content of the
-manuscript. The tool was not used to generate or analyse data,
-to design experiments, or to interpret results.
+used AI-assisted tools (Anthropic Claude and OpenAI ChatGPT) for
+English-language polishing and for simulating critical reviewer
+commentary on draft text during manuscript preparation. The
+authors reviewed, edited, and verified all AI-assisted output,
+and take full responsibility for the final scientific content
+of the manuscript. The tools were not used to generate or
+analyse data, to design experiments, or to interpret results.
