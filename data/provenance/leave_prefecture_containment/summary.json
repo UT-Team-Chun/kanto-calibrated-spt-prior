@@ -1,0 +1,108 @@
+{
+  "protocol": "leave-prefecture-out (administrative-polygon containment, point-in-polygon)",
+  "prefectures": [
+    "tokyo",
+    "kanagawa",
+    "saitama",
+    "chiba",
+    "ibaraki",
+    "tochigi",
+    "gunma"
+  ],
+  "n_test_in_prefecture": 435732,
+  "corpus_rows": 495725,
+  "gpboost": {
+    "config": {
+      "num_neighbors": 20,
+      "n_boost_iter": 300
+    },
+    "per_fold": {
+      "tokyo": {
+        "rmse": 9.105208871760546,
+        "mae": 6.690884640666765,
+        "n_test": 59672
+      },
+      "kanagawa": {
+        "rmse": 9.276518219761861,
+        "mae": 7.42838212987777,
+        "n_test": 31726
+      },
+      "saitama": {
+        "rmse": 9.909937028026913,
+        "mae": 7.607373949088127,
+        "n_test": 101027
+      },
+      "chiba": {
+        "rmse": 9.5912369801796,
+        "mae": 7.372087126239179,
+        "n_test": 72675
+      },
+      "ibaraki": {
+        "rmse": 10.549823722831656,
+        "mae": 7.920424484067677,
+        "n_test": 126989
+      },
+      "tochigi": {
+        "rmse": 10.149465285714086,
+        "mae": 7.327043661907858,
+        "n_test": 22538
+      },
+      "gunma": {
+        "rmse": 10.640529968773434,
+        "mae": 7.78564900020799,
+        "n_test": 21105
+      }
+    },
+    "macro_mean_rmse": 9.889,
+    "macro_mean_mae": 7.4474,
+    "rmse_std": 0.5539,
+    "worst_rmse": 10.640529968773434,
+    "worst_fold": "gunma",
+    "n_test_sum": 435732
+  },
+  "catboost": {
+    "per_fold": {
+      "tokyo": {
+        "rmse": 9.367349232348653,
+        "mae": 6.025326392946981,
+        "n_test": 59672
+      },
+      "kanagawa": {
+        "rmse": 9.567558245356663,
+        "mae": 6.980632244654714,
+        "n_test": 31726
+      },
+      "saitama": {
+        "rmse": 10.429897287760353,
+        "mae": 7.67193713973633,
+        "n_test": 101027
+      },
+      "chiba": {
+        "rmse": 9.645509529172498,
+        "mae": 6.1391916848675745,
+        "n_test": 72675
+      },
+      "ibaraki": {
+        "rmse": 10.636970207549806,
+        "mae": 7.593186974833451,
+        "n_test": 126989
+      },
+      "tochigi": {
+        "rmse": 10.120626272282152,
+        "mae": 7.221442349026226,
+        "n_test": 22538
+      },
+      "gunma": {
+        "rmse": 10.820787229247612,
+        "mae": 8.29318957266553,
+        "n_test": 21105
+      }
+    },
+    "macro_mean_rmse": 10.0841,
+    "macro_mean_mae": 7.1321,
+    "rmse_std": 0.5267,
+    "worst_rmse": 10.820787229247612,
+    "worst_fold": "gunma",
+    "n_test_sum": 435732
+  }
+}
