@@ -37,8 +37,8 @@ mesh (`MeshLevel`). Four geometries:
 |---|---|---|
 | **random** | Load-balanced mesh shuffle; interleaved fold geometry; in-distribution diagnostic. | all six candidate regressors |
 | **contiguous** | `k`-means on secondary-mesh centroids; geographic-block folds; the stricter spatial-extrapolation test. | all six candidate regressors |
-| **buffered** | 1-mesh ring removed from each fold's training set; characterises worst-case spatial leakage. | DKL+SVGP envelope only |
-| **leave-prefecture-out (LPO)** | Whole prefecture (Tokyo / Tochigi / Chiba) withheld; characterises out-of-distribution boundary. | DKL+SVGP envelope only |
+| **buffered** | 1-mesh ring removed from each fold's training set; characterises worst-case spatial leakage. | DKL+SVGP + recommended regressors (GPBoost, CatBoost) |
+| **leave-prefecture-out (LPO)** | Whole prefecture withheld (all seven Kanto prefectures, administrative-polygon containment); characterises out-of-distribution boundary. | GPBoost, CatBoost |
 
 `K = 3`, seed `42`. Canonical assignments are persisted to
 [`data/fold_indices/`](../data/fold_indices/).

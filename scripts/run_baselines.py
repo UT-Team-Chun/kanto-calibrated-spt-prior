@@ -23,7 +23,7 @@ Baselines:
 All baselines use the same spatial K-fold splits seeded by the
 foundation model's training (seed=42, mesh_level=2) so the row
 indices match what we report as the SVGP headline. Per-fold and
-mean RMSE/MAE are stored in ``data/runs/baselines/summary.json``.
+mean RMSE/MAE are stored in ``data/runs/kanto/baselines/summary.json``.
 """
 
 from __future__ import annotations
@@ -45,7 +45,11 @@ from national.evaluation.baselines import (
     fit_predict_kriging,
     fit_predict_rf,
 )
-from national.evaluation.spatial_kfold import spatial_kfold_split
+from national.evaluation.spatial_kfold import (
+    spatial_kfold_split,
+    spatial_kfold_split_buffered,
+    spatial_kfold_split_contiguous,
+)
 
 LOG = logging.getLogger("scripts.run_baselines")
 
@@ -73,11 +77,23 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--output-dir",
         type=Path,
-        default=repo / "data/runs/baselines",
+        default=repo / "data/runs/kanto/baselines",
     )
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--n-folds", type=int, default=3)
     parser.add_argument("--mesh-level", type=int, default=2)
+    parser.add_argument(
+        "--fold-assignment",
+        choices=["random", "contiguous", "buffered-contiguous"],
+        default="random",
+        help="random mesh-shuffle (default), contiguous geographic blocks, "
+             "or contiguous blocks with a 1-mesh buffer ring (R1.3 spatial "
+             "extrapolation comparison for kriging/IDW).",
+    )
+    parser.add_argument(
+        "--buffer-meshes", type=int, default=1,
+        help="Ring size when --fold-assignment buffered-contiguous.",
+    )
     parser.add_argument(
         "--baselines",
         nargs="+",
@@ -127,13 +143,21 @@ def main(argv: list[str] | None = None) -> int:
         "longitude_deg": lon,
         "n_value": y_full,
     })
-    folds = spatial_kfold_split(
-        sub_df,
-        n_folds=args.n_folds,
-        mesh_level=args.mesh_level,
-        seed=args.seed,
-    )
-    LOG.info("Spatial K-fold: %d folds", len(folds))
+    if args.fold_assignment == "random":
+        folds = spatial_kfold_split(
+            sub_df, n_folds=args.n_folds, mesh_level=args.mesh_level, seed=args.seed,
+        )
+    elif args.fold_assignment == "contiguous":
+        folds = spatial_kfold_split_contiguous(
+            sub_df, n_folds=args.n_folds, mesh_level=args.mesh_level, seed=args.seed,
+        )
+    else:  # buffered-contiguous
+        folds = spatial_kfold_split_buffered(
+            sub_df, n_folds=args.n_folds, mesh_level=args.mesh_level,
+            buffer_meshes=args.buffer_meshes, seed=args.seed,
+            base_split="contiguous",
+        )
+    LOG.info("Spatial K-fold (%s): %d folds", args.fold_assignment, len(folds))
 
     # ---- 3. Per-fold metrics ------------------------------------------
     results: dict[str, list[dict]] = {b: [] for b in args.baselines}
@@ -169,6 +193,7 @@ def main(argv: list[str] | None = None) -> int:
                 n_subsample=args.kriging_subsample,
                 nu=1.5,
                 random_state=args.seed,
+                predict_std=False,  # point RMSE/MAE only; std is O(N*M^2)
             )
             rmse = float(np.sqrt(np.mean((yhat - yt_test) ** 2)))
             mae = float(np.mean(np.abs(yhat - yt_test)))
@@ -205,6 +230,9 @@ def main(argv: list[str] | None = None) -> int:
         "parquet": str(args.parquet),
         "n_folds": args.n_folds,
         "mesh_level": args.mesh_level,
+        "fold_assignment": args.fold_assignment,
+        "buffer_meshes": (args.buffer_meshes
+                          if args.fold_assignment == "buffered-contiguous" else 0),
         "seed": args.seed,
         "kriging_subsample": args.kriging_subsample,
         "rf_trees": args.rf_trees,
@@ -221,7 +249,8 @@ def main(argv: list[str] | None = None) -> int:
             "mae_std": float(mae_arr.std(ddof=0)),
             "wall_s_total": float(timings[b]),
         }
-    summary_path = args.output_dir / "summary.json"
+    suffix = "" if args.fold_assignment == "random" else f"_{args.fold_assignment.replace('-', '_')}"
+    summary_path = args.output_dir / f"summary{suffix}.json"
     summary_path.write_text(json.dumps(summary, indent=2))
     LOG.info("Wrote %s", summary_path)
 

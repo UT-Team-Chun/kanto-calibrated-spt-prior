@@ -64,19 +64,30 @@ Reference only; **not** a held-out generalisation number.
 | `\OperationalRMSE` | 5.875 | `scripts.train_kanto_smoke` | `data/provenance/kanto_full_6k_50ep_linear_rbf/summary.json` |
 | `\OperationalMAE` | 3.144 | (same) | (same) |
 
-### Buffered + leave-prefecture-out diagnostics (DKL+SVGP envelope)
+### Buffered + leave-prefecture-out diagnostics (recommended deployment regressors)
 
-These two fold geometries are run for the operational DKL+SVGP
-configuration only and characterise the spatial-leakage /
-out-of-distribution envelope.
+Buffered cross-validation is run for the operational DKL+SVGP
+configuration and the recommended deployment regressors (GPBoost,
+CatBoost). Leave-prefecture-out — over **all seven** Kanto prefectures,
+each borehole assigned by **administrative-polygon containment**
+(point-in-polygon; `national/evaluation/prefecture_regions.py` with the
+released `national/evaluation/assets/kanto_prefecture_polygon_assignment.parquet`,
+nearest-polygon fallback for reclaimed/coastal edge points) — is run for
+GPBoost and CatBoost. The seven held-out folds are SPT measurement rows
+summing to 435,732 of the 495,725-row corpus (neighbouring-prefecture rows
+are train-only). All GPBoost cells use the canonical configuration
+(`num_neighbors = 20`, 300 boosting rounds), matching the Table 8 contiguous
+benchmark. Together these geometries characterise the spatial-leakage and
+out-of-distribution envelopes.
 
-| Paper macro | Reported value | Producing script | Output measurement |
-|---|---|---|---|
-| `\BufferedRMSE` | 15.004 | `scripts.eval_buffered_cv --geometry random` | `data/provenance/buffered_random_k3/summary.json` |
-| `\BufferedContigRMSE` | 13.575 | `scripts.eval_buffered_cv --geometry contig` | `data/provenance/buffered_contig_k3/summary.json` |
-| `\BufferedTrainShrinkagePct` | 93 | (auto from same) | (same) |
-| `\BufferedContigTrainShrinkagePct` | 16 | (auto from same) | (same) |
-| `\LeavePrefMeanRMSE` | (Tokyo/Tochigi/Chiba mean) | `scripts.eval_leave_prefecture` | `data/provenance/leave_prefecture/summary.json` |
+| Paper macro | Reported value | Producing script |
+|---|---|---|
+| `\BufferedRMSE` (DKL+SVGP, random + 1-mesh ring) | 15.004 | DKL eval (`scripts.train_kanto_smoke`, buffered geometry) |
+| `\BufferedContigRMSE` (DKL+SVGP, contiguous + 1-mesh ring) | 13.575 | (same) |
+| `\RRGPBoostLPMeanRMSE` (GPBoost LPO, 7-prefecture macro mean) | 9.89 (cov 0.950) | `scripts.run_leave_region_out --partition prefecture --model gpboost` |
+| `\RRCatBoostLPMeanRMSE` (CatBoost LPO, 7-prefecture macro mean) | 10.08 (cov 0.946) | `scripts.run_leave_region_out --partition prefecture --model catboost` |
+| `\RRGPBoostBufOneRMSE` (GPBoost buffer-0 → buffer-1) | 10.82 → 10.84 | `scripts.run_buffered_baselines --model gpboost` |
+| `\RRCatBoostBufOneRMSE` (CatBoost buffer-0 → buffer-1) | 12.95 → 12.60 | `scripts.run_buffered_baselines --model catboost` |
 
 ### Released survival predictor (Random Survival Forest)
 
@@ -178,10 +189,11 @@ python -m scripts.compute_tree_conformal_paired_bca
 # 8. Conformal calibration + Mondrian decomposition
 python -m scripts.compute_locally_weighted_conformal
 
-# 9. Buffered CV + leave-prefecture-out (DKL+SVGP envelope)
-python -m scripts.eval_buffered_cv --geometry random
-python -m scripts.eval_buffered_cv --geometry contig
-python -m scripts.eval_leave_prefecture
+# 9. Buffered CV + leave-prefecture-out (recommended deployment regressors)
+python -m scripts.run_buffered_baselines --model gpboost  --base-split contiguous
+python -m scripts.run_buffered_baselines --model catboost --base-split contiguous
+python -m scripts.run_leave_region_out --partition prefecture --model gpboost
+python -m scripts.run_leave_region_out --partition prefecture --model catboost
 
 # 10. Right-censored survival reformulation (Schoenfeld → RSF released)
 python -m scripts.train_survival_cox_ph

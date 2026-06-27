@@ -50,12 +50,21 @@ Each script is a thin CLI wrapper over the modules in
 | `train_hybrid_kanto.py` | Cross-fit CatBoost teacher + SVGP residual hybrid; `k=3` (null) and `k=5` (`HybridXfitRMSEContig`) protocols. Supplementary architectural diagnostic. |
 | `train_hurdle_model.py` | Two-stage hurdle (Stage 1: P(N≥30) classifier; Stage 2: separated soft/stiff regressors). Supplementary architectural diagnostic. |
 
-### Auxiliary spatial-validation geometries (DKL+SVGP envelope)
+### Auxiliary spatial-validation geometries (recommended deployment regressors)
 
 | Script | Geometry |
 |---|---|
-| `eval_buffered_cv.py` | Buffered (1-mesh ring) random / contiguous. |
-| `eval_leave_prefecture.py` | Leave-prefecture-out (Tokyo / Tochigi / Chiba). |
+| `run_buffered_baselines.py` | Buffered (1-mesh ring) contiguous CV for GPBoost / CatBoost. |
+| `run_leave_region_out.py --partition prefecture` | Leave-prefecture-out over all seven Kanto prefectures (administrative-polygon containment) for GPBoost / CatBoost; `--prefectures` runs a subset. |
+
+### Review-response analyses
+
+| Script | Purpose |
+|---|---|
+| `run_correction_sensitivity.py` | Correction-metadata audit + partial-correction sensitivity (raw vs C_N vs C_N·C_R). |
+| `build_feature_importance_phase_r.py` | Tree-SHAP + permutation importance (random vs contiguous folds). |
+| `build_lithology_breakdown_phase_r.py` | Per-macro-lithology OOF error breakdown. |
+| `build_bucket_b_analyses.py` | Per-depth / per-regime signed-bias diagnostics. |
 
 ### Aggregators and figure / table builders
 
@@ -110,10 +119,11 @@ python -m scripts.train_hybrid_kanto --inner-k 5
 # 7. Conformal + Mondrian decomposition
 python -m scripts.compute_locally_weighted_conformal
 
-# 8. Auxiliary spatial-validation geometries
-python -m scripts.eval_buffered_cv --geometry random
-python -m scripts.eval_buffered_cv --geometry contig
-python -m scripts.eval_leave_prefecture
+# 8. Auxiliary spatial-validation geometries (recommended deployment regressors)
+python -m scripts.run_buffered_baselines --model gpboost  --base-split contiguous
+python -m scripts.run_buffered_baselines --model catboost --base-split contiguous
+python -m scripts.run_leave_region_out --partition prefecture --model gpboost
+python -m scripts.run_leave_region_out --partition prefecture --model catboost
 
 # 9. Paper tables and figures
 python -m scripts.build_paper_tables

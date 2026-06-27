@@ -73,7 +73,8 @@ def fit_predict_kriging(
     n_subsample: int = 10000,
     nu: float = 1.5,
     random_state: int = 42,
-) -> tuple[np.ndarray, np.ndarray]:
+    predict_std: bool = True,
+) -> tuple[np.ndarray, np.ndarray | None]:
     """Ordinary kriging baseline via ``sklearn.gaussian_process``.
 
     Full-data kriging on >\\!100\\,000 rows is intractable
@@ -123,6 +124,18 @@ def fit_predict_kriging(
         random_state=random_state,
     )
     gp.fit(train_xyz, train_y)
+    if not predict_std:
+        # The point RMSE/MAE only need the mean. Predict in query chunks so the
+        # dense (n_query, n_subsample) cross-kernel never materialises in full:
+        # on a contiguous fold n_query can be ~280k, which against a 10k
+        # sub-sample is a ~22 GB matrix and OOMs. Chunking bounds it to
+        # chunk_size * n_subsample.
+        chunk = 20_000
+        means = [
+            gp.predict(query_xyz[i:i + chunk], return_std=False)
+            for i in range(0, len(query_xyz), chunk)
+        ]
+        return (np.concatenate(means) if means else np.empty(0)), None
     mean, std = gp.predict(query_xyz, return_std=True)
     return mean, std
 
