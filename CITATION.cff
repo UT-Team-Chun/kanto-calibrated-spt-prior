@@ -2,6 +2,8 @@ cff-version: 1.2.0
 message: "If you use this software in your research, please cite the accompanying paper."
 title: "A calibrated regional screening framework for SPT N-values from public borehole records under strict spatial cross-validation"
 type: software
+version: "0.2.0"
+date-released: "2026-06-27"
 authors:
   - family-names: "Okauchi"
     given-names: "Ryota"
